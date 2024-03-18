@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Калькулятор для расчета дробей</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #4B0082;
+      color: #ffffff;
+    }
+
+    .calc-container {
+      max-width: 660px;
+      margin: 0 auto;
+    }
+
+    .calc-header {
+      background-color: #800080;
+      padding: 10px;
+      font-size: 24px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .calc-content {
+      padding: 20px;
+    }
+
+    .fraction input[type="text"] {
+      width: 50px;
+      text-align: center;
+    }
+
+    .calc-btn-div {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .calc-btn {
+      background-color: #800080;
+      color: #ffffff;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+      display: inline-block;
+    }
+
+    .calc-btn:hover {
+      background-color: #9932CC;
+    }
+
+    .calc-footer {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .btn_clear {
+      cursor: pointer;
+      color: #ffffff;
+    }
+
+    .btn_clear:hover {
+      color: #FFD700;
+    }
+  </style>
+  <script src="scripts.js"></script>
+</head>
+<body>
+
+<div id="calc_fraction" class="calc-container">
+  <div class="calc-header">Калькулятор для расчета дробей</div>
+
+  <div class="calc-content">
+    Вид дроби:
+    <input type="radio" name="frac_var" class="frac-var" value="s" id="frac_var1"> <label for="frac_var1">простые дроби</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" name="frac_var" class="frac-var" value="m" id="frac_var2" checked="checked"> <label for="frac_var2">смешанные дроби</label>
+
+    <table style="margin:0 auto;" class="fraction">
+      <tbody>
+        <tr>
+          <td> </td>
+          <td> </td>
+          <td style="text-align:center;">  Дробь 1 </td>
+          <td> </td>
+          <td> </td>
+          <td> </td>
+          <td style="text-align:center;">  Дробь 2 </td>
+          <td> </td>
+          <td class="fr-res-td"> </td>
+          <td class="fr-res-td"> </td>
+          <td style="text-align:center;" class="fr-res-td">  Результат </td>
+        </tr>
+        <tr>
+          <td rowspan="3" style="font-size:14px; font-weight:bold;"> <div id="fr_sign1" style="display:none; margin-right:5px;">−</div> </td>
+          <td rowspan="3">
+            <div id="div_f1" style="display:block">
+              <input type="text" inputmode="numeric" id="f1_int" class="calc-input val_fraction" value="" style="width:40px; text-align:right; padding-right:3px; margin-right:5px;" tabindex="1">
+            </div>  
+          </td>
+          <td class="cell_fr">
+            <input type="text" inputmode="numeric" id="f1_num" class="calc-input val_fraction" value="" tabindex="2">
+          </td>
+          <td rowspan="3">
+            <select id="op_fr" class="sel-op" tabindex="4">
+              <option value="+" selected="selected">+</option>
+              <option value="-">−</option>
+              <option value="*">×</option>
+              <option value="/">÷</option>
+            </select>
+          </td>
+          <td rowspan="3" style="font-size:14px; font-weight:bold;"><div id="fr_sign2" style="display:none; margin-right:5px;">−</div> </td>
+          <td rowspan="3">
+            <div id="div_f2" style="display:block">
+              <input type="text" inputmode="numeric" id="f2_int" class="calc-input val_fraction" value="" style="width:40px; text-align:right; padding-right:3px; margin-right:5px;" tabindex="5">
+            </div> 
+          </td>
+          <td class="cell_fr">
+            <input type="text" inputmode="numeric" id="f2_num" class="val_fraction" value="" tabindex="5">
+          </td>
+          <td rowspan="3" style="text-align:center;" width="20"><span class="equal-sign">=</span>
+          </td>
+          <td rowspan="3" class="fr-res-td" style="font-size:14px; font-weight:bold;"><div id="fr_sign3" style="display:none; margin-right:5px;">−</div> </td>
+          <td rowspan="3" class="fr-res-td">
+            <div id="div_f3" style="display:none">
+              <input type="text" id="f3_int" class="calc-input val_fraction" value="" style="width:40px; text-align:right; padding-right:3px;  margin-right:5px;">
+            </div> 
+          </td>
+          <td class="cell_fr fr-res-td">
+            <input type="text" id="f3_num" class="calc-input val_fraction" value="">
+          </td>
+        </tr> 
+        <tr>
+          <td class="line_fraction"></td>
+          <td class="line_fraction"></td>
+          <td class="line_fraction fr-res-td"></td>
+        </tr> 
+        <tr>
+          <td class="cell_fr">
+            <input type="text" inputmode="numeric" name="f1_den" id="f1_den" class="calc-input val_fraction" value="" tabindex="3">
+          </td>
+          <td class="cell_fr">
+            <input type="text" inputmode="numeric" name="f2_den" id="f2_den" class="calc-input val_fraction" value="" tabindex="7">
+          </td>
+          <td class="cell_fr fr-res-td">
+            <input type="text" name="f3_den" id="f3_den" class="calc-input val_fraction" value="">
+          </td>
+        </tr>
+        <tr>
+          <td></td> 
+          <td></td> 
+          <td style="text-align:center;"> <span class="change_sign" id="change_sign_fr1">+/−</span></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td style="text-align:center;"><span class="change_sign" id="change_sign_fr2">+/−</span></td>
+          <td class="fr-res-td"></td>
+          <td class="fr-res-td"></td>
+          <td class="fr-res-td"></td>
+        </tr> 
+      </tbody>
+    </table>
+     
+    <div class="calc-btn-div">
+      <span id="btn_calculate" class="calc-btn"><div class="calc_loading"></div>Вычислить</span>   
+    </div>
+  </div>
+
+  <div class="calc-footer">
+    <div style="float:left; margin-top:5px;">
+      <span class="btn_clear" id="btn_clear_f"><span class="clr-symb">✖</span> <span class="clr-text"> Очистить поля с данными</span></span>
+    </div>
+    <div></div>  
+  </div>
+</div>
+
+</body>
+</html>
